@@ -1,0 +1,5 @@
+# SAM & BAM
+## Sequence Alignment/Map & SAM 的二进制格式
+## header section
++ 该部分全部以“@”开头，提供基本的软件版本，参考序列信息，排序信息等
++ @HD 行：这一行中有各种不同的标识
