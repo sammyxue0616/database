@@ -11,9 +11,12 @@ nate, 对于 coordinate，排序的主键是 Alignments section 的第三列“R
 RNAME 和 POS 相等的比对，排列顺序则是任意的
 + @SQ 行的 “SN”标签是参考序列名；LN是参考序列长度，它的值主要是用于 Alignments section 的第三列
 “RNAME”和第七列“MRNM”比对的记录
+![image](https://github.com/sammyxue0616/database/assets/167417350/b42eda1b-8681-4d1c-992e-2d4d6de8e285)
+
 + @RG 行是样品基本信息Read Group，1个sample的测序结果为1个Read Group；该sample可以有多个library的测序结果，可以利用bwa mem -R 加上去这些信息 eg：@RG ID:ZX1_ID SM:ZX1 LB:PE400 PU:Illumina PL:Miseq ID：样品号 SM：样品名 LB：文库名 PU：测序以 PL：测序平台
 + @PG 行是使用的程序说明；该行“ID”为程序记录标识符，“PN”为程序名字，“CL”为命令行
 + @CO 行是任意的说明信息
+![image](https://github.com/sammyxue0616/database/assets/167417350/53b21d4e-646a-4bd0-8e4f-53512763e3dd)
 
 > [!NOTE]
 > 1. mapping: bwa,GATK,bismark,...
