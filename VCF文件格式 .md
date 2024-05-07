@@ -55,4 +55,32 @@ Phred 的质量值，表示改位点存在变异的可能性。Q=‑10lgP，Q �
 | QD | Quality by Depth | 该变异质量分数（QUAL）与测序深度（DP）的比值。用于评估改位点的质量 |
 | VT | Variant Type | 变异类型，一般包括 SNP，MNP，INDEL，SV 等 |
 | MAF | Minor Allele Frequency | 次要等位基因频率，用来粗略地了解给定人群中给定SNP的基因型变异，表示这个SNP有多普遍 |
-|
+| EAF | Effect Allele Frequency | 效应等位基因频率，本质上是等位基因，其与疾病的关系正在被研究。因此，效应等位基因总是次要等位基因 |
+
+### FORMAT
+在 header 中都有其注解
+| 字段 | 全称 | 描述 |
+| --------- | --------- | --------- |
+| GT | Genotype | 表示基因型。对于二倍体样本，用两个数字中间以 / 或 \| 分隔。0表示 REF 的等位基因，1表示 ALT 的等位基因，2表示有第二个 ALT 的等位基因。 1/1表示纯合子，0/1表示杂合子，有两个基因型 |
+| AD | Allele Depth | 样本中等位基因的 reads 覆盖度。对于二倍体，1000,1100用逗号分隔，前者是 REF，后者是 ALT |
+| DP | Read Depth | 该位点 reads 覆盖度 |
+| GQ | Genotype Quality | 基因型的质量值，表示该基因型的可能性，值越高，可能性越大。计算：Phred 值=-10log10(P)，P 为基因型错误的概率 |
+| PL | Provieds the Likelihoods of the given genotypes | 三种基因型的质量值，即0/0，0/1，1/1，三种基因型的概率总和为1。值越小表示是该基因型的概率越大。同样是计算 Phred 值，但是 P 为基因型存在的概率 |
+| PGT | Phased Genotype | 只出现在进行过相分离的样本中。表示相分离后的基因型，两个数字间使用 \| 表示二倍体样本的基因型 |
+| PID | Phase ID | 描述基因型相位的标识符 |
+| PS | Phase Set | 描述同一样本中基因型相位的信息 |
+| FS |  FisherStrand | 使用 Fisher’s 精确检验来检测 strand bias 而得到的 Fhred 格式的 p 值，该值越小越好；如果该值较大，表示 strand bias（正负链偏移）越严重，即所检测到的 variants 位点上，reads 比对到正负义链上的比例不均衡。一般进行 filter 的时候，推荐保留 FS<10‑20 的 variants 位点。GATK 可设定 FS 参数 |
+| ReadPosRandSum | |  Z‑score from Wilcoxon rank sum test of Alt vs. Ref read position bias. 当 variants 出现在 reads 尾部的时候，其结果可能不准确。该值用于衡量 alternative allele（变异的等位基因）相比于 reference allele（参考基因组等位基因），其 variant 位点是否匹配到 reads 更靠中部的位置。因此只有基因型是杂合且有一个 allele 和参考基因组一致的时候，才能计算该值。若该值为正值，表明和 alternative allele 相当于 reference allele，落来 reads 更靠中部的位置；若该值是负值，则表示 alternative allele 相比于 reference allele 落在 reads 更靠尾部的位置。进行 filter 的之后，推荐保留 ReadPosRankSum>‑1.65 ‑ ‑3.0 的 variant 位点 |
+| MQRankSum | | 用于衡量 alternative allele 上 reads 的 mapping quality 与 reference allele上reads的mapping quality的差异。若该值是负数值，则表明alternative allele 比 reference allele 的 reads mapping quality 差。进行 filter 的时候，推荐保留 MQRankSum > ‑1.65 ‑ ‑3.0 的 variant 位点 |
+| HaplotypeScore | | 表示该位点与最多两个分离的单倍型的一致性 |
+| InbreedingCoef | | 表示基于每个样本的基因型 PL 的近交系数 |
+| MLEAC | Maximum Likelihood Expectation (MLE) for the Allele Counts | 不一定与 AC 相同，对于每个 ALT 等位基因，其顺序与所列出的顺序相同 |
+| MLEAF | Maximum Likelihood Expectation (MLE) for the Allele Frequency | 不一定与 AF 相同，对于每个 ALT 等位基因，其顺序与所列出的顺序相同 |
+| MQ | RMS Mapping Quality | |
+| MQ0 | Total Mapping Quality Zero Reads | |
+| MQRankSum | Z‑score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities | |
+| QD | Variant Confidence/Quality by Depth | |
+| RPA | | 每个等位基因重复序列重复次数（包括参考文献）|
+| RU | Tandem repeat unit | |
+| ReadPosRankSum | Z‑score from Wilcoxon rank sum test of Alt vs. Ref read position bias | |
+| STR | | 变体是一个短的串联重复序列 |
