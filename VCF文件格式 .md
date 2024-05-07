@@ -84,3 +84,6 @@ Phred 的质量值，表示改位点存在变异的可能性。Q=‑10lgP，Q �
 | RU | Tandem repeat unit | |
 | ReadPosRankSum | Z‑score from Wilcoxon rank sum test of Alt vs. Ref read position bias | |
 | STR | | 变体是一个短的串联重复序列 |
++ 相位化（phasing）是确定某个个体在某个基因位点所携带的等位基因来自哪个亲本的过程
+  - GT 字段中的 / 表示基因型未相位化，表示我们不确定哪个等位基因来自父亲或母亲
+  - GT 字段中的 | 表示基因型相位化，也就是说可以确定等位基因的来源亲本
