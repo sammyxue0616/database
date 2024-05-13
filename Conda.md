@@ -14,6 +14,30 @@
 
 ## conda 环境设置
 
+~~~
+export PATH=/home/xuem1/software/anaconda3/bin/conda:$PATH
+
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+ __conda_setup="$('/data/software/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+ if [ $? -eq 0 ]; then
+     eval "$__conda_setup"
+ else
+     if [ -f "/data/software/anaconda3/etc/profile.d/conda.sh" ]; then
+         . "/data/software/anaconda3/etc/profile.d/conda.sh"
+    else
+         export PATH="/data/software/anaconda3/bin:$PATH"
+     fi
+ fi
+unset __conda_setup
+
+export CONDA_PKGS_DIRS=/data/home/xuem1/.conda/pkgs
+
+# <<< conda initialize <<<
+~~~
 
 ~~~
 conda --version
@@ -35,6 +59,8 @@ conda info -envs
 通过 conda create 命令可以创建一个新环境，利用 --name 选项，可以为新环境命名。
 ~~~
 conda create -name python_3.10 python=3.10
+
+# 创建一个名为 python_3.10 的包含 Python 3.10 的新环境
 ~~~
 
 ### 激活环境
@@ -42,7 +68,9 @@ conda create -name python_3.10 python=3.10
 ~~~
 conda activate python_3.10
 ~~~
-
++ 如果直接使用 conda activate （不带环境名），会默认切回 base 环境
++ conda activate 仅适用于 conda 4.6 及更高版本
++ 
 ### 安装包
 
 ~~~
